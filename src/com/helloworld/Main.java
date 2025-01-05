@@ -5,26 +5,33 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        // Konstante za broj meseci u godini i pretvaranje procenata
         final byte MONTHS_IN_YEAR = 12;
         final byte PERCENT = 100;
 
+        // Kreiranje skenera za unos podataka sa tastature
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Principal: ");
-        int principal = scanner.nextInt();
+        // Unos glavnice (Principal)
+        System.out.print("Principal: ");// Glavnica kredita
+        int principal = scanner.nextInt();// Čita unetu vrednost
 
-        System.out.print("Annual Interest Rate: ");
-        float annualInterest = scanner.nextFloat();
-        float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+        // Unos godišnje kamate
+        System.out.print("Annual Interest Rate: ");// Godišnja kamata
+        float annualInterest = scanner.nextFloat();// Uzimanje vrednosti
+        float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;// Računanje ukupnog broja uplata
 
-        System.out.print("Period (Years): ");
-        byte years = scanner.nextByte();
-        int numberOfPayments = years * MONTHS_IN_YEAR;
+        // Unos trajanja kredita u godinama
+        System.out.print("Period (Years): ");// Trajanje kredita
+        byte years = scanner.nextByte();// Unos broja godina
+        int numberOfPayments = years * MONTHS_IN_YEAR;// Računanje ukupnog broja uplata
 
+        // Računanje mesečne rate koristeći formulu za hipoteku (Amortizacija kredita)
         double mortgage = principal
                 * (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments))
                 / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
 
+        // Formatiranje rezultata u novčanu vrednost (valutu)
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
         System.out.println("Mortgage: " + mortgageFormatted);
     }
